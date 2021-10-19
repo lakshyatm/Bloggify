@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AlphaBlog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  <%= render 'pages/navigation' %>
+  <%= render 'pages/messages'%>
+  
+     <%= yield %> 
+
+     <%# <footer class="footer mt-auto py-3 bg-dark">
+  <div class="container text-center">
+    <span class="text-white">Copyright &copy; Your website</span>
+  </div>
+</footer> %>
+  </body>
+</html>

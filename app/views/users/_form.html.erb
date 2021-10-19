@@ -1,0 +1,51 @@
+<div class="row justify-content-center pt-4">
+  <div class="col-10">
+    <% if @user.errors.any? %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <h4 class="alert-heading">The following errors prevented the user from being saved</h4>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      <hr>
+      <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <%end %>
+    <%= form_with(model: @user, class: "shadow p-3 mb-3 bg-info rounded", local: true) do |f| %>
+    <div class="form-group row mb-4">
+      <%= f.label :username, class: "col-2 col-form-label text-light" %>
+      <div class="col-10">
+        <%= f.text_field :username, class: "form-control shadow rounded", placeholder: "Enter a username" %>
+      </div>
+    </div>
+
+    <div class="form-group row mb-4">
+      <%= f.label :email, class: "col-2 col-form-label text-light" %>
+      <div class="col-10">
+        <%= f.text_field :email,  class: "form-control shadow rounded", placeholder: "Email" %>
+      </div>
+    </div>
+
+    <div class="form-group row mb-4">
+      <%= f.label :password, class: "col-2 col-form-label text-light" %>
+      <div class="col-10">
+        <%= f.password_field :password,  class: "form-control shadow rounded", placeholder: "Enter a password" %>
+      </div>
+    </div>
+
+    <div class="form-group row mb-4">
+      <%= f.label :image,"Upload profile image", class: "col-2 col-form-label text-light" %>
+      <div class="col-10">
+        <%= f.file_field :image,  class: "form-control shadow rounded", placeholder: "Enter a password" %>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <%= f.submit(@user.new_record? ? "Sign Up" : "Update Account", class: "btn btn-outline-light btn-lg") %>
+    </div>
+    <% end %>
+  </div>
+</div>

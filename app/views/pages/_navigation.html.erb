@@ -1,0 +1,103 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <div class="container-fluid">
+    <% if (!logged_in?) %>
+      <%= link_to'BLOGGIFY',root_path ,class:"navbar-brand" ,id:"logo" %>
+    <%end%> 
+
+    <% if (logged_in?) %>
+      <%= link_to'BLOGGIFY',articles_path ,class:"navbar-brand" ,id:"logo" %>
+    <%end%>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <%= link_to'Bloggers', users_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Articles
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if logged_in? %>
+            <li><%= link_to'Create New Article', new_article_path ,class:"dropdown-item" %></li>
+            <% end %>
+            <li><%= link_to'View Articles', articles_path , class:"dropdown-item" %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if (logged_in? && current_user.admin?) %>
+            <li><%= link_to'Create New Category', new_category_path ,class:"dropdown-item" %></li>
+            <% end %>
+            <li><%= link_to'View Categories', categories_path , class:"dropdown-item" %></li>
+          </ul>
+        </li>
+
+        <% if logged_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <%= "[Admin]" if current_user.admin %>Profile
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to'View your profile', user_path(current_user) ,class:"dropdown-item" %></li>
+            <li><%= link_to'Edit your profile', edit_user_path(current_user) , class:"dropdown-item" %></li>
+            <li><%= link_to'Delete profile', user_path(current_user) ,class:"dropdown-item text-danger", method: :delete, data: { confirm: "Are you sure?"} %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Chat Room', chatroom_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to 'Log Out', logout_path, class: "nav-link", 
+          method: :delete %>
+        </li>
+
+        
+
+        <% else %>
+        <li class="nav-item">
+          <%= link_to'Log In', login_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to'Sign Up', signup_path, class: "nav-link"%>
+        </li>
+        <% end %>
+      </ul>
+
+      <% if logged_in? %>  
+        <ul class="navbar-nav me-5 mb-2 mb-lg-0">
+         <li class="nav-item">
+           <div>
+           <span>
+               <%if current_user.image.attached? %>
+                  <%= image_tag(current_user.image, style:"width:30px; height:30px; border-radius:50%") %>
+               <%else%>
+                  <%= image_tag 'avatar_icon.png', alt: 'icon',:style => "height: 30px; width:30px;border-radius:50%" %>
+              <%end%>
+             </span>
+             
+             <span class="ps-2 fs-6 fw-bold">
+               <%= current_user.username %>
+             <span>
+           </div>
+         </li>
+        </ul>
+      <%end%>
+      
+    </div>
+
+  </div>
+</nav>

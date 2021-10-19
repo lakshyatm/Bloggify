@@ -1,0 +1,36 @@
+<div class="page-content">
+  <div class="container mt-4 ">
+    <div class="row">
+      <div class="alert alert-success pb-0" role="alert">
+        <h4 class="alert-heading fw-bolder">Welcome to the Chat Room!!</h4>
+        <p class="pt-1 fw-bold">
+          Let's Chat? <br>
+          Drop a message here.<br>
+          Share your thoughts.<br>
+          Let's build a connection!! Discover bloggers and be friends!!
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="container mt-2">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="chat_room p-3 shadow rounded">
+            <div class="chat-section" id="message-container">
+              <%= render @messages %>
+            </div>
+            <%= form_for(@message, url: message_path, remote: true, html: {class: "send-message-form", id:"message-form"}) do |f| %>
+            <div class="input-group mb-3">
+              <%= f.text_field :body, class: "form-control" ,id:"input-message", placeholder: "Enter your message" %>
+              <%= f.button "Send", class:"btn btn-outline-secondary send_btn", id:"button-addon2" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+</div>
